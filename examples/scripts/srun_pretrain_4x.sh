@@ -2,7 +2,7 @@ export KMER=6
 export TRAIN_FILE=/home/mliu121/william/project/gene-bert/examples/data/hs1.fa.2500000n.6mer
 export TEST_FILE=/home/mliu121/william/project/gene-bert/examples/data/hs1.fa.2500000n.6mer
 export SOURCE=/home/mliu121/william/project/gene-bert/
-export OUTPUT_PATH=work_dirs/hs1.fa.2500000n.6mer${KMER}_lr5e-2_mlmp0.025
+export OUTPUT_PATH=work_dirs/hs1.fa.2500000n.6mer$KMER
 
 NOW=$(date +"%Y%m%d_%H%M%S")
 
@@ -10,11 +10,11 @@ mkdir -p $OUTPUT_PATH
 srun --partition a100 \
     --ntasks=1 \
     --ntasks-per-node=1 \
-    --gres=gpu:1 \
+    --gres=gpu:4 \
     --job-name=pretrain \
     --mem=60G \
     --time 48:00:00 \
-    -A danielk_gpu  \
+    -A yqiao4_gpu \
     python run_pretrain.py \
     --output_dir $OUTPUT_PATH \
     --model_type=dna \
@@ -30,11 +30,11 @@ srun --partition a100 \
     --per_gpu_eval_batch_size 32 \
     --save_steps 500 \
     --save_total_limit 20 \
-    --max_steps 32000 \
+    --max_steps 16000 \
     --evaluate_during_training \
-    --logging_steps 5000 \
+    --logging_steps 500 \
     --line_by_line \
-    --learning_rate 5e-2 \
+    --learning_rate 8e-3 \
     --block_size 512 \
     --adam_epsilon 1e-6 \
     --weight_decay 0.01 \

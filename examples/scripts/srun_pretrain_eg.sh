@@ -1,8 +1,8 @@
 export KMER=6
-export TRAIN_FILE=/home/mliu121/william/project/gene-bert/examples/data/hs1.fa.2500000n.6mer
-export TEST_FILE=/home/mliu121/william/project/gene-bert/examples/data/hs1.fa.2500000n.6mer
+export TRAIN_FILE=sample_data/pre/6_3k.txt
+export TEST_FILE=sample_data/pre/6_3k.txt
 export SOURCE=/home/mliu121/william/project/gene-bert/
-export OUTPUT_PATH=work_dirs/hs1.fa.2500000n.6mer${KMER}_lr5e-2_mlmp0.025
+export OUTPUT_PATH=work_dirs/6_3k
 
 NOW=$(date +"%Y%m%d_%H%M%S")
 
@@ -13,8 +13,8 @@ srun --partition a100 \
     --gres=gpu:1 \
     --job-name=pretrain \
     --mem=60G \
-    --time 48:00:00 \
-    -A danielk_gpu  \
+    --time 24:00:00 \
+    -A cs601_gpu  \
     python run_pretrain.py \
     --output_dir $OUTPUT_PATH \
     --model_type=dna \
