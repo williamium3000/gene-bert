@@ -65,6 +65,7 @@ from transformers import (
     XLNetForSequenceClassification,
     XLNetTokenizer,
     get_linear_schedule_with_warmup,
+    BertForSequenceClassificationWith2DCNN
 )
 from transformers import glue_compute_metrics as compute_metrics
 from transformers import glue_convert_examples_to_features as convert_examples_to_features
@@ -99,6 +100,7 @@ ALL_MODELS = sum(
 
 MODEL_CLASSES = {
     "dna": (BertConfig, BertForSequenceClassification, DNATokenizer),
+    "dna_2dcnn": (BertConfig, BertForSequenceClassificationWith2DCNN, DNATokenizer),
     "dnalong": (BertConfig, BertForLongSequenceClassification, DNATokenizer),
     "dnalongcat": (BertConfig, BertForLongSequenceClassificationCat, DNATokenizer),
     "bert": (BertConfig, BertForSequenceClassification, BertTokenizer),
