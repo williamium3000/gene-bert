@@ -278,6 +278,7 @@ if is_torch_available():
         FlaubertForQuestionAnsweringSimple,
         FLAUBERT_PRETRAINED_MODEL_ARCHIVE_MAP,
     )
+    from .modeling_bert_2dcnn import BertForSequenceClassificationWith2DCNN
 
     # Optimization
     from .optimization import (
