@@ -77,11 +77,11 @@ logger = logging.getLogger(__name__)
 
 
 MODEL_CLASSES = {
-    "gpt2": (GPT2Config, GPT2LMHeadModel, GPT2Tokenizer),
+    "gpt2": (GPT2Config, GPT2LMHeadModel, DNATokenizer),
     "openai-gpt": (OpenAIGPTConfig, OpenAIGPTLMHeadModel, OpenAIGPTTokenizer),
     "dna": (BertConfig, BertForMaskedLM, DNATokenizer),
     "bert": (BertConfig, BertForMaskedLM, BertTokenizer),
-    "roberta": (RobertaConfig, RobertaForMaskedLM, RobertaTokenizer),
+    "roberta": (RobertaConfig, RobertaForMaskedLM, DNATokenizer),
     "distilbert": (DistilBertConfig, DistilBertForMaskedLM, DistilBertTokenizer),
     "camembert": (CamembertConfig, CamembertForMaskedLM, CamembertTokenizer),
 }
@@ -102,7 +102,7 @@ class TextDataset(Dataset):
 
         directory, filename = os.path.split(file_path)
         cached_features_file = os.path.join(
-            directory, args.model_type + "_cached_lm_" + str(block_size) + "_" + filename
+            directory, "dna" + "_cached_lm_" + str(block_size) + "_" + filename
         )
 
         if os.path.exists(cached_features_file) and not args.overwrite_cache:
